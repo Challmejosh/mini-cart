@@ -6,6 +6,7 @@ import { getItems, setItems } from "./localStorage";
 const AppContext = createContext();
 
 const Context = ({children}) => {
+    // const topElementRef =useRef(null)
     const [cart,setCart] = useState(()=>{
         const item = getItems("cart")
         if(!item){return []}
@@ -14,6 +15,7 @@ const Context = ({children}) => {
     const [detail,setDetail] = useState([])
     const [product,setProduct] = useState([])
     const [input,setInput] = useState('')
+    // const [animate,setAnimate] = useState("")
     const [changeCart,setChangeCart] = useState(false)
      const {pending,data} = useFetch('https://fakestoreapi.com/products')
      useEffect(()=>{
@@ -24,13 +26,15 @@ const Context = ({children}) => {
         const checkItem = data.find(item => item.id === prod.id)
         if(checkItem){
             const reCheck = cart.find(item => item.id === prod.id)
-       if(reCheck){
-           if (cart.map(item => item.id === prod.id)){
-               toast('already in cart')
-           }
-       }else{
-           setCart([...cart, {...checkItem, quantity: + 1}])
-           toast("added to cart")
+            if(reCheck){
+                if (cart.map(item => item.id === prod.id)){
+                    toast('already in cart')
+                    setAnimate("")
+                }
+            }else{
+                setCart([...cart, {...checkItem, quantity: + 1}])
+                toast("added to cart")
+                setAnimate(prod.title)
        }
    }
         
