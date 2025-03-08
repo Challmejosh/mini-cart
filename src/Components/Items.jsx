@@ -1,13 +1,18 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AppContext } from "../Utilities/Context";
+import Category from "./Category";
 // import { motion } from "framer-motion";
 
 const Item = ({Items}) => {
     const {pending,handleCart,detailFunc} = useContext(AppContext)
     return ( 
         <div className="w-full">
+        {/* {pending ? <Category /> : null} */}
         {pending ? (
+            <>
+            
+                <Category />
             <div className=" gap-5 grid items-center justify-center grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full ">
                 {Items.map(item =>{
                                     
@@ -35,8 +40,9 @@ const Item = ({Items}) => {
                     </div>
                 )})}
             </div>
+            </>
         ):(
-            <div className="flex items-center justify-center ">
+            <div className="flex items-center h-screen justify-center ">
                 <div className="loader">
 
                 </div>
