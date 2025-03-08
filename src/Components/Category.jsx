@@ -6,7 +6,7 @@ const Category = () => {
     
     return ( 
         <div className="w-full  my-5 flex items-center justify-center ">
-            {pending ? (
+            {/* {pending ? ( */}
                 <div className="flex p-1 flex-wrap items-center justify-start gap-x-3">
                     <p className="font-semibold text-lg  ">Category : </p>
                     <div className="flex flex-wrap items-center justify-between gap-1 ">
@@ -16,11 +16,11 @@ const Category = () => {
                         ))}
                     </div>
                 </div>
-            ):(
+            {/* ):(
                 <div className="">
                     category loading....
                 </div>
-            )}
+            )} */}
         </div>
      );
 }

@@ -14,7 +14,7 @@ function App() {
     <>
     <ToastContainer />
     <Search />
-    <Category />
+    {/* <Category /> */}
     <Routes>
       <Route path="/" exact element={<Product />} />
       <Route path='/cart' element={<Cart />} />

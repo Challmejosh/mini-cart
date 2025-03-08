@@ -7,6 +7,8 @@ const AppContext = createContext();
 
 const Context = ({children}) => {
     // const topElementRef =useRef(null)
+    const [done,setDone] = useState(false)
+    const [empty,setEmpty] = useState(false)
     const [cart,setCart] = useState(()=>{
         const item = getItems("cart")
         if(!item){return []}
@@ -101,14 +103,27 @@ const Context = ({children}) => {
                 toast(error.code)
             }
         }
-        const proceed = async (e)=>{
+        const proceed = async (e,router)=>{
             e.preventDefault();
-            await localStorage.removeItem("cart")
-            toast("payment done")
+            if(total === 0){
+                    setEmpty(true)
+                    setTimeout(() => {
+                        setEmpty(false)
+                    }, 5000);
+            }else{
+                setDone(true)
+                await localStorage.removeItem("cart")
+                setTimeout(() => {
+                    setDone(false)
+                }, 5000);
+                setTimeout(() => {
+                    router("/")
+                },6000);
+            }
         }
          
     return ( 
-        <AppContext.Provider value={{pending,data,handleCart,handleRemCart,detail,detailFunc,changeCart,cart,setChangeCart,handleDelete,total,totalQuantity,addCart,setProduct,product,input,setInput,proceed}}>
+        <AppContext.Provider value={{pending,data,done,empty,handleCart,handleRemCart,detail,detailFunc,changeCart,cart,setChangeCart,handleDelete,total,totalQuantity,addCart,setProduct,product,input,setInput,proceed}}>
             {children}
         </AppContext.Provider>
      );
